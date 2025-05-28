@@ -21,10 +21,11 @@ function updateCountdown() {
 }
 
 async function loadQuote() {
-  const res = await fetch("assets/current-quote.json");
+  const res = await fetch("assets/current-quote.json?v=" + new Date().getTime());
   const data = await res.json();
   dailyQuote.textContent = data.quote;
 }
+
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
