@@ -1,0 +1,30 @@
+name: Update Daily Quote
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:      # Allow manual run
+
+jobs:
+  update-quote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set current day number
+        id: date
+        run: echo "DAY=$(date +%j)" >> $GITHUB_ENV
+
+      - name: Copy today's quote
+        run: |
+          DAY_IN_SERIES=$(( (${DAY} - 1) % 10 + 1 ))
+          cp quotes/day-${DAY_IN_SERIES}.json assets/current-quote.json
+
+      - name: Commit and push updated quote
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add assets/current-quote.json
+          git commit -m "Daily quote update (Day $DAY)"
+          git push
