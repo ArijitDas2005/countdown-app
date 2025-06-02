@@ -1,1 +1,12 @@
-{ "quote": "I get butterflies every time I see your name pop up 💌" }
+{
+  "quotes": [
+    {
+      "day": 2,
+      "quote": "If kisses were code, I’d be in an infinite loop with you. 💻💋"
+    },
+    {
+      "day": 3,
+      "quote": "You're not just my favorite notification, you're the only one I keep my ringer on for. 🔔❤️"
+    }
+  ]
+}
